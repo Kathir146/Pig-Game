@@ -1,13 +1,349 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
+* {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: inherit;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+html {
+  font-size: 62.5%;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  font-weight: 400;
+  height: 100vh;
+  color: #333;
+  background-image: linear-gradient(to top left, #753682 0%, #bf2e34 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* LAYOUT */
+main {
+  position: relative;
+  width: 100rem;
+  height: 60rem;
+  background-color: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(200px);
+  filter: blur();
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.25);
+  border-radius: 9px;
+  overflow: hidden;
+  display: flex;
+}
+.App {
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.75s;
+}
+.player,
+.player-1,
+.player-2 {
+  flex: 50%;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.75s;
+}
+
+.btn .player-1 {
+  transform: translateY(-50%);
+}
+/* ELEMENTS */
+.name {
+  position: relative;
+  font-size: 4rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  word-spacing: 2px;
+  font-weight: 200;
+  margin-bottom: 1rem;
+}
+
+.score {
+  font-size: 8rem;
+  font-weight: 300;
+  color: #c7365f;
+  margin-bottom: auto;
+}
+
+.player--0 {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.current {
+  position: absolute;
+  background-color: #c7365f;
+  opacity: 0.8;
+  border-radius: 9px;
+  color: #fff;
+  width: 30%;
+  height: 22%;
+  left: 34.2%;
+  transform: translateY(43rem);
+  padding: 2rem;
+  text-align: center;
+  transition: all 0.75s;
+}
+
+.current-label {
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  font-size: 1.7rem;
+  color: #ddd;
+}
+
+.current-score {
+  font-size: 3.5rem;
+}
+.current h2 {
+  transform: translateY(-2rem);
+  font-size: 3rem;
+  padding: 0.5rem;
+  letter-spacing: 2px;
+}
+.current h3 {
+  font-size: 2rem;
+  transform: translateY(-3rem);
+
+  text-transform: uppercase;
+  /* padding-top: 2rem; */
+}
+.current-score {
+  font-size: 3.5rem;
+}
+
+/* ABSOLUTE POSITIONED ELEMENTS */
+.btn {
+  position: absolute;
+  color: #444;
+  bottom: 30%;
+  transform: translate(-40px, -25px);
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 3rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s;
+
+  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+
+  padding: 2.5rem 2.5rem;
+  border-radius: 50%;
+  box-shadow: 0 1.75rem 3.5rem rgba(0, 0, 0, 0.1);
+}
+
+.btn--new {
+  top: 30rem;
+  position: absolute;
+  left: 43%;
+  color: #ddd;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  font-weight: 400;
+  transition: all 0.2s;
+  background-image: linear-gradient(to top left, #9661a1d5 0%, #e24348d5 100%);
+
+  backdrop-filter: blur(10px);
+
+  padding: 1.5rem 2.5rem;
+  border-radius: 50rem;
+  box-shadow: 0 1.75rem 3.5rem rgba(116, 115, 115, 0.1);
+}
+.current-winner {
+  text-transform: uppercase;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  font-size: 1.9rem;
+  color: #ec1351;
+}
+.hidden {
+  opacity: 0;
+}
+.visible {
+  opacity: 1;
+}
+.btn--hold.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+.btn--hold.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.hidden {
+  display: none;
+}
+.pad {
+  padding-top: 6%;
+}
+.btn--roll {
+  top: 39.3rem;
+}
+
+.btn--hold {
+  top: 35rem;
+  /* top: 4rem; */
+  position: absolute;
+  left: 43%;
+  color: #333;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1.75rem 3.5rem rgba(116, 115, 115, 0.1);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 50rem;
+  font-weight: 500;
+  padding: 1.5rem;
+  /* transform: translateY(5rem); */
+}
+
+.btn:active {
+  transform: translate(-50%, 3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+.btn--hold:active,
+.btn--new:active {
+  transform: translateY(3px);
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.rps-image {
+  position: absolute;
+  width: 20rem;
+  bottom: 60%;
+  top: 22rem;
+  /* transform: translateX(10px); */
+  height: 10rem;
+  transition: opacity 0.5s ease;
+  /* box-shadow: 0 2rem 5rem rgba(0, 0, 0, 0.2); */
+}
+.p0 {
+  transform: translateX(18rem);
+}
+.p1 {
+  transform: scaleX(-1) translateX(18rem);
+}
+
+.player--winner {
+  background-color: #2f2f2f;
+}
+
+.player--winner .name {
+  font-weight: 700;
+  color: #c7365f;
+}
+.winner {
+  color: #c7365f;
+  margin-bottom: 25rem;
+  font-weight: 600;
+  font-size: 4rem;
+}
+.hidden {
+  display: none;
+}
+.player-title {
+  color: rgba(255, 255, 255, 0.638);
+  padding: 4rem;
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 5rem;
+}
+.playerName {
+  border: 2.3px solid #c7365f;
+  background: none;
+  padding: 1rem;
+  border-radius: 2rem;
+  margin: 3rem;
+}
+.playerName::placeholder {
+  color: rgba(255, 255, 255, 0.638) !important;
+}
+.btn--start {
+  top: 46rem;
+  left: 62.5rem;
+  position: absolute;
+  text-decoration: none;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  color: #333;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1.75rem 3.5rem rgba(116, 115, 115, 0.1);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 40rem;
+  font-weight: 600;
+  padding: 1.3rem;
+  /* transform: translateY(5rem); */
+}
+.game-title {
+  font-family: url(../src/Components/Monoton-Font/OFL.txt) !important;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 9rem;
+  margin-top: 10px;
+  font-weight: bold;
+}
+.btn--view {
+  top: 53rem;
+  /* top: 4rem; */
+  position: absolute;
+  text-decoration: none;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  color: #333;
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 1.75rem 3.5rem rgba(116, 115, 115, 0.1);
+
+  padding: 0.7rem 2.5rem;
+  border-radius: 40rem;
+  font-weight: 600;
+  padding: 1.3rem 2.5rem;
 }
