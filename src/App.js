@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import rock from "./Components/Assets/rock.png";
 import paper from "./Components/Assets/paper.png";
 import scissors from "./Components/Assets/scissors.png";
-import StickyPopup from "./Components/StickyPopup/StickyPopup";
-
 const choices = [rock, paper, scissors];
 
 function App() {
